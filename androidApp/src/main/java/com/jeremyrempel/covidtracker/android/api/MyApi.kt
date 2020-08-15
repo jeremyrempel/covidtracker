@@ -1,7 +1,7 @@
 package com.jeremyrempel.covidtracker.android.api
 
 import io.ktor.client.HttpClient
-import io.ktor.client.request.*
+import io.ktor.client.request.get
 
 /**
  * https://api.covidtracking.com/v1/us/current.json
