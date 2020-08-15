@@ -8,6 +8,5 @@ import io.ktor.client.HttpClient
 class MyApi(val client: HttpClient = HttpClient()) {
 
     suspend fun getDataFromNetwork() {
-
     }
 }
