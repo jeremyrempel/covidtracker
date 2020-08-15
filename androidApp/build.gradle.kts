@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(Versions.compile_sdk)
 
     defaultConfig {
         applicationId("com.jeremyrempel.covidtracker.android")
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdkVersion(Versions.min_sdk)
+        targetSdkVersion(Versions.target_sdk)
         versionCode = 1
         versionName = "1.0"
 
@@ -64,16 +64,8 @@ dependencies {
     implementation("androidx.compose.material:material:${Versions.compose}")
     implementation("androidx.ui:ui-tooling:${Versions.compose}")
 
-    // ktor
-    implementation("io.ktor:ktor-client-okhttp:${Versions.ktor}")
-    implementation("io.ktor:ktor-client-json-jvm:${Versions.ktor}")
-    implementation("io.ktor:ktor-client-logging-jvm:${Versions.ktor}")
-
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}")
-
-    // serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.serialization}")
 
     // google
     implementation("androidx.core:core-ktx:1.3.1")

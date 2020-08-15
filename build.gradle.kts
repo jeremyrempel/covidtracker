@@ -5,8 +5,9 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.2.0-alpha07")
+        classpath("com.android.tools.build:gradle:${Versions.android_gradle_plugin}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
+        classpath("com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}")
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
