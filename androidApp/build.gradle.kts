@@ -54,6 +54,8 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 }
 
 dependencies {
+    implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
+
     // jetpack
     implementation("androidx.compose.runtime:runtime:${Versions.compose}")
     implementation("androidx.compose.ui:ui:${Versions.compose}")
@@ -62,7 +64,12 @@ dependencies {
     implementation("androidx.ui:ui-tooling:${Versions.compose}")
 
     // ktor
+    implementation("io.ktor:ktor-client-okhttp:${Versions.ktor}")
     implementation("io.ktor:ktor-client-json-jvm:${Versions.ktor}")
+    implementation("io.ktor:ktor-client-logging-jvm:${Versions.ktor}")
+
+    // coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}")
 
     // google
     implementation("androidx.core:core-ktx:1.3.1")
