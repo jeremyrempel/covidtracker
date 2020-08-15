@@ -63,11 +63,6 @@ dependencies {
     implementation("androidx.compose.material:material:${Versions.compose}")
     implementation("androidx.ui:ui-tooling:${Versions.compose}")
 
-    // ktor
-    implementation("io.ktor:ktor-client-okhttp:${Versions.ktor}")
-    implementation("io.ktor:ktor-client-json-jvm:${Versions.ktor}")
-    implementation("io.ktor:ktor-client-logging-jvm:${Versions.ktor}")
-
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}")
 
