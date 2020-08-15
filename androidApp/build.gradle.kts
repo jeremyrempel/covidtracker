@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    kotlin("plugin.serialization") version Versions.kotlin
 }
 
 android {
@@ -70,6 +71,9 @@ dependencies {
 
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}")
+
+    // serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.serialization}")
 
     // google
     implementation("androidx.core:core-ktx:1.3.1")
