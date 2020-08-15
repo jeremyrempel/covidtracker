@@ -55,7 +55,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 }
 
 dependencies {
-    implementation(kotlin("stdlib", org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION))
+    implementation(project(":shared"))
 
     // jetpack
     implementation("androidx.compose.runtime:runtime:${Versions.compose}")
