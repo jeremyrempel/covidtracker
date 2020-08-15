@@ -39,6 +39,11 @@ android {
         kotlinCompilerVersion = Versions.kotlin
         kotlinCompilerExtensionVersion = Versions.compose
     }
+
+    lintOptions {
+        isWarningsAsErrors = true
+        isAbortOnError = true
+    }
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
@@ -49,14 +54,17 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 }
 
 dependencies {
-
+    // jetpack
     implementation("androidx.compose.runtime:runtime:${Versions.compose}")
     implementation("androidx.compose.ui:ui:${Versions.compose}")
     implementation("androidx.compose.foundation:foundation:${Versions.compose}")
     implementation("androidx.compose.material:material:${Versions.compose}")
     implementation("androidx.ui:ui-tooling:${Versions.compose}")
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.compose}")
+    // ktor
+    implementation("io.ktor:ktor-client-json-jvm:${Versions.ktor}")
+
+    // google
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("com.google.android.material:material:1.2.0")

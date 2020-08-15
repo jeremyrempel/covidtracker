@@ -20,6 +20,28 @@ allprojects {
     }
 }
 
+plugins {
+    id("org.jlleitschuh.gradle.ktlint") version Versions.ktlint_gradle_plugin
+}
+
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+    ktlint {
+        version.set("0.37.2")
+        verbose.set(true)
+        filter {
+            exclude { it.file.path.contains("build/") }
+        }
+    }
+
+    afterEvaluate {
+        tasks.named("check").configure {
+            dependsOn(tasks.getByName("ktlintCheck"))
+        }
+    }
+}
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

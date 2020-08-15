@@ -4,8 +4,17 @@ import androidx.compose.foundation.Box
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Divider
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
@@ -27,7 +36,6 @@ val red = Color(200, 50, 50)
 
 @Composable
 fun MyApp() {
-
     val currentContent = state { 0 }
     val openDialog = state { false }
 
@@ -59,7 +67,6 @@ fun MyApp() {
 
 @Composable
 fun DataTable() {
-
     Column {
         Box(Modifier.padding(20.dp)) {
             TwoColumnRow("Total Cases", "5,172,216", UpDown.UP)
@@ -77,7 +84,6 @@ fun DataTable() {
 
 @Composable
 fun BottomNavigationAlwaysShowLabelComponent(selectedIndex: Int, onSelect: (Int) -> Unit) {
-
     data class BottomNavItems(val id: Int, val title: String, val icon: VectorAsset)
 
     val listItems = listOf(
@@ -101,7 +107,6 @@ fun BottomNavigationAlwaysShowLabelComponent(selectedIndex: Int, onSelect: (Int)
             // is usually used to represent primary destinations in your application,
             // BottomNavigationItem represents a singular primary destination in your application.
 
-
             BottomNavigationItem(
                 icon = { Icon(asset = item.icon) },
                 label = { Text(text = item.title) },
@@ -116,7 +121,6 @@ enum class UpDown { UP, DOWN, NEUTRAL }
 
 @Composable
 fun TwoColumnRow(left: String, right: String, upDown: UpDown = UpDown.NEUTRAL) {
-
     Row(
         modifier = Modifier.fillMaxWidth().padding(4.dp),
         horizontalArrangement = Arrangement.SpaceBetween
