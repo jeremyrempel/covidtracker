@@ -11,7 +11,10 @@ import androidx.compose.ui.graphics.Color
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun MyAppTheme(enableDarkMode: Boolean, children: @Composable() () -> Unit) {
+fun MyAppTheme(
+    enableDarkMode: Boolean,
+    children: @Composable() () -> Unit
+) {
     // lightColors is a default implementation of the ColorPalette from the MaterialDesign
     // specification https://material.io/design/color/the-color-system.html#color-theme-creation.
     // for easy use. In this case, I'm just showing an example of how you can
