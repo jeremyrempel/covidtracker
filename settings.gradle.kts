@@ -1,2 +1,2 @@
 rootProject.name = "Covid Tracker"
-include(":androidApp")
+include(":androidApp", ":shared")

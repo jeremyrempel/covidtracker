@@ -1,15 +1,16 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    kotlin("plugin.serialization") version Versions.kotlin
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(Versions.compile_sdk)
 
     defaultConfig {
         applicationId("com.jeremyrempel.covidtracker.android")
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdkVersion(Versions.min_sdk)
+        targetSdkVersion(Versions.target_sdk)
         versionCode = 1
         versionName = "1.0"
 
