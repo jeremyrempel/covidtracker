@@ -3,29 +3,27 @@ object Versions {
     const val target_sdk = 30
     const val compile_sdk = 30
 
-    val kotlin = "1.4.0"
+    const val kotlin = "1.4.0"
     const val compose = "0.1.0-dev16"
-    val androidx_test = "1.2.0"
-    val androidx_test_ext = "1.1.1"
-    val android_gradle_plugin = "4.2.0-alpha07"
-    val junit = "4.13"
-    val sqlDelight = "1.4.0"
-    val ktor = "1.3.2-1.4.0-rc"
-    val coroutines = "1.3.5-native-mt"
+    const val androidx_test = "1.2.0"
+    const val androidx_test_ext = "1.1.1"
+    const val android_gradle_plugin = "4.2.0-alpha07"
+    const val junit = "4.13"
+    const val sqlDelight = "1.4.0"
+    const val ktor = "1.3.2-1.4.0-rc"
+    const val coroutines = "1.3.5-native-mt"
     const val serialization = "1.0-M1-1.4.0-rc"
-    val lifecycle = "2.1.0"
-    val ktlint_gradle_plugin = "9.2.1"
-    val robolectric = "4.3.1"
+    const val lifecycle = "2.1.0"
+    const val ktlint_gradle_plugin = "9.2.1"
+    const val robolectric = "4.3.1"
 }
 
 object Deps {
-    val app_compat_x = "androidx.appcompat:appcompat:1.1.0"
-    val material_x = "com.google.android.material:material:1.1.0"
-    val core_ktx = "androidx.core:core-ktx:1.2.0"
-    val constraintlayout = "androidx.constraintlayout:constraintlayout:1.1.3"
-    val recyclerView = "androidx.recyclerview:recyclerview:1.1.0"
+    const val app_compat = "androidx.appcompat:appcompat:1.2.0"
+    const val material = "com.google.android.material:material:1.2.0"
+    const val core_ktx = "androidx.core:core-ktx:1.3.1"
     val android_gradle_plugin = "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
-    val junit = "junit:junit:${Versions.junit}"
+    const val junit = "junit:junit:${Versions.junit}"
     val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
 
     object AndroidXTest {
@@ -43,11 +41,14 @@ object Deps {
     }
 
     object Coroutines {
-        val common = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${Versions.coroutines}"
-        val jdk = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-        val native = "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:${Versions.coroutines}"
-        val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
-        val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
+        const val common =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${Versions.coroutines}"
+        const val jdk = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+        const val native =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:${Versions.coroutines}"
+        const val android =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     }
 
     object SqlDelight {
@@ -59,19 +60,19 @@ object Deps {
     }
 
     object Ktor {
-        val commonCore = "io.ktor:ktor-client-core:${Versions.ktor}"
-        val commonJson = "io.ktor:ktor-client-json:${Versions.ktor}"
-        val commonLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
-        val jvmCore = "io.ktor:ktor-client-core-jvm:${Versions.ktor}"
-        val androidCore = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
-        val jvmJson = "io.ktor:ktor-client-json-jvm:${Versions.ktor}"
-        val jvmLogging = "io.ktor:ktor-client-logging-jvm:${Versions.ktor}"
-        val ios = "io.ktor:ktor-client-ios:${Versions.ktor}"
-        val iosCore = "io.ktor:ktor-client-core-native:${Versions.ktor}"
-        val iosJson = "io.ktor:ktor-client-json-native:${Versions.ktor}"
-        val iosLogging = "io.ktor:ktor-client-logging-native:${Versions.ktor}"
-        val commonSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
-        val androidSerialization = "io.ktor:ktor-client-serialization-jvm:${Versions.ktor}"
-        val iosSerialization = "io.ktor:ktor-client-serialization-native:${Versions.ktor}"
+        const val commonCore = "io.ktor:ktor-client-core:${Versions.ktor}"
+        const val commonJson = "io.ktor:ktor-client-json:${Versions.ktor}"
+        const val commonLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
+        const val jvmCore = "io.ktor:ktor-client-core-jvm:${Versions.ktor}"
+        const val androidCore = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
+        const val jvmJson = "io.ktor:ktor-client-json-jvm:${Versions.ktor}"
+        const val jvmLogging = "io.ktor:ktor-client-logging-jvm:${Versions.ktor}"
+        const val ios = "io.ktor:ktor-client-ios:${Versions.ktor}"
+        const val iosCore = "io.ktor:ktor-client-core-native:${Versions.ktor}"
+        const val iosJson = "io.ktor:ktor-client-json-native:${Versions.ktor}"
+        const val iosLogging = "io.ktor:ktor-client-logging-native:${Versions.ktor}"
+        const val commonSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
+        const val androidSerialization = "io.ktor:ktor-client-serialization-jvm:${Versions.ktor}"
+        const val iosSerialization = "io.ktor:ktor-client-serialization-native:${Versions.ktor}"
     }
 }

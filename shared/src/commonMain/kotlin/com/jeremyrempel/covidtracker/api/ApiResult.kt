@@ -1,4 +1,4 @@
-package com.jeremyrempel.covidtracker.android.api
+package com.jeremyrempel.covidtracker.api
 
 import kotlinx.serialization.Serializable
 

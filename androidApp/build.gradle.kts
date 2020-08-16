@@ -65,14 +65,16 @@ dependencies {
     implementation("androidx.ui:ui-tooling:${Versions.compose}")
 
     // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}")
+    implementation(Deps.Coroutines.jdk)
+    implementation(Deps.Coroutines.android)
+    implementation(Deps.Ktor.androidCore)
 
     // google
-    implementation("androidx.core:core-ktx:1.3.1")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.2.0")
+    implementation(Deps.core_ktx)
+    implementation(Deps.app_compat)
+    implementation(Deps.material)
 
-    testImplementation("junit:junit:4.13")
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
+    testImplementation(Deps.junit)
+    androidTestImplementation(Deps.AndroidXTest.junit)
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }
