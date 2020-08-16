@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             val api = MyApi()
             val result = api.getCurrentData()
             println(result)
-        }.start()
+        }
 
         setContent {
             MyAppTheme(isSystemInDarkTheme()) {
