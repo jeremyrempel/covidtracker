@@ -1,4 +1,4 @@
-package com.jeremyrempel.covidtracker.android.api
+package com.jeremyrempel.covidtracker.api
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
