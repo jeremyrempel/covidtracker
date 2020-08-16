@@ -9,15 +9,14 @@ import io.ktor.client.request.get
 class MyApi(
     private val client: HttpClient = HttpClient(),
     private val scheme: String = "https",
-    private val host: String = "api.covidtracking.com",
-    private val path: String = "/v1/us/current.json"
+    private val host: String = "api.covidtracking.com"
 
 ) {
-    suspend fun getDataFromNetwork(): ApiResult {
+    suspend fun getCurrentData(): ApiResult {
         return client.get(
             scheme = scheme,
             host = host,
-            path = path
+            path = "/v1/us/current.json"
         )
     }
 }
