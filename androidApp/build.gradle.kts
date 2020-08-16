@@ -67,6 +67,7 @@ dependencies {
     // coroutines
     implementation(Deps.Coroutines.jdk)
     implementation(Deps.Coroutines.android)
+    implementation(Deps.Ktor.androidCore)
 
     // google
     implementation(Deps.core_ktx)
