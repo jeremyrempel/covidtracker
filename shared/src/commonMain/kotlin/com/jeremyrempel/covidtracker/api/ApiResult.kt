@@ -3,4 +3,4 @@ package com.jeremyrempel.covidtracker.api
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ApiResult(val date: String)
+data class ApiResult(val date: Long)
