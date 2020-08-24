@@ -1,6 +1,5 @@
 package com.jeremyrempel.covidtracker.api
 
-import io.ktor.util.date.GMTDate
 import kotlinx.serialization.Serializable
 
 @Serializable
