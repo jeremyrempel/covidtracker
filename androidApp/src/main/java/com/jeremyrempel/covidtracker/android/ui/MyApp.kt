@@ -4,23 +4,13 @@ import androidx.compose.foundation.Box
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Divider
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.state
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,21 +20,36 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.example.composetest.R
+import com.jeremyrempel.covidtracker.api.ApiResult
+import kotlinx.coroutines.flow.Flow
+import java.text.DecimalFormat
 
 val green = Color(50, 150, 50)
 val red = Color(200, 50, 50)
 
 @Composable
-fun MyApp() {
-    val currentContent = state { 0 }
-    val openDialog = state { false }
+fun MyApp(flow: Flow<Lce<ApiResult>>) {
+
+    val uiModel: Lce<ApiResult> by flow.collectAsState(initial = Lce.Loading())
+
+    when (uiModel) {
+        is Lce.Loading -> LoadingView()
+        is Lce.Error -> ErrorView((uiModel as Lce.Error<ApiResult>).msg) // todo why doesn't smart cast work?
+        is Lce.Content<ApiResult> -> MainScreen((uiModel as Lce.Content<ApiResult>).data)
+    }
+}
+
+@Composable
+fun MainScreen(uiModel: ApiResult) {
+    var openDialog by remember { mutableStateOf(false) }
+    var currentContent by remember { mutableStateOf(0) }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Covid Tracker US") },
                 actions = {
-                    IconButton(onClick = { openDialog.value = true }) {
+                    IconButton(onClick = { openDialog = true }) {
                         Icon(Icons.Filled.Settings)
                     }
                 }
@@ -56,8 +61,8 @@ fun MyApp() {
 //            }
 //        },
         bodyContent = {
-            when (currentContent.value) {
-                0 -> DataTable()
+            when (currentContent) {
+                0 -> DataTable(uiModel)
                 1 -> Text("States")
                 2 -> Text("Settings")
             }
@@ -66,12 +71,51 @@ fun MyApp() {
 }
 
 @Composable
-fun DataTable() {
+fun ErrorView(text: String) {
+    Text(text)
+}
+
+@Composable
+fun LoadingView() {
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Covid Tracker US") }
+            )
+        },
+        bodyContent = {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalGravity = Alignment.CenterHorizontally
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+    )
+
+}
+
+@Composable
+fun DataTable(
+    uiModel: ApiResult
+) {
+    val numFormatter = DecimalFormat("#,###")
+
     Column {
         Box(Modifier.padding(20.dp)) {
-            TwoColumnRow("Total Cases", "5,172,216", UpDown.UP)
-            TwoColumnRow("New Cases", "55742", UpDown.UP)
-            TwoColumnRow("Total Hospitalized", "47,919", UpDown.DOWN)
+            TwoColumnRow("Total Cases", numFormatter.format(uiModel.total), UpDown.UP)
+            TwoColumnRow(
+                "New Cases",
+                numFormatter.format(uiModel.totalTestResultsIncrease),
+                UpDown.UP
+            )
+            TwoColumnRow(
+                "Total Hospitalized",
+                numFormatter.format(uiModel.hospitalized),
+                UpDown.DOWN
+            )
             TwoColumnRow("Total ICU", "9533", UpDown.UP)
             TwoColumnRow("Total Ventilator", "9533", UpDown.DOWN)
 

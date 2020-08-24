@@ -4,25 +4,25 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.platform.setContent
-import com.jeremyrempel.covidtracker.android.ui.MyApp
-import com.jeremyrempel.covidtracker.android.ui.MyAppTheme
+import com.jeremyrempel.covidtracker.android.ui.*
 import com.jeremyrempel.covidtracker.api.MyApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.flow
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val job = GlobalScope.launch {
+
+        val uiStateFlow = flow {
             val api = MyApi()
-            val result = api.getCurrentData()
-            println(result)
+            val uiModel = api.getCurrentData()[0]
+            emit(Lce.Content(uiModel))
         }
+
 
         setContent {
             MyAppTheme(isSystemInDarkTheme()) {
-                MyApp()
+                MyApp(uiStateFlow)
             }
         }
     }
