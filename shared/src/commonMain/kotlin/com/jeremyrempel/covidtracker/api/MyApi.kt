@@ -21,12 +21,7 @@ class MyApi(
     private val client = HttpClient {
 
         install(JsonFeature) {
-            val config = Json {
-                isLenient = false
-                ignoreUnknownKeys = true
-                allowSpecialFloatingPointValues = true
-                useArrayPolymorphism = false
-            }
+            val config = Json.Default
             serializer = KotlinxSerializer(config)
         }
         install(Logging) {
