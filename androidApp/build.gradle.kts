@@ -74,6 +74,9 @@ dependencies {
     implementation(Deps.app_compat)
     implementation(Deps.material)
 
+    // kotlinx.datetime
+    implementation(Deps.kotlindate)
+
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.AndroidXTest.junit)
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")

@@ -38,6 +38,7 @@ import androidx.ui.tooling.preview.Preview
 import com.example.composetest.R
 import com.jeremyrempel.covidtracker.api.ApiResult
 import kotlinx.coroutines.flow.Flow
+import kotlinx.datetime.toJavaInstant
 import java.text.DecimalFormat
 
 val green = Color(50, 150, 50)
@@ -135,7 +136,7 @@ fun DataTable(
             TwoColumnRow("Total Ventilator", "9533", UpDown.DOWN)
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                Text("Last Updated Aug 12, 2020", color = Color.Gray)
+                Text("Last Updated ${uiModel.lastModified}", color = Color.Gray)
             }
         }
     }

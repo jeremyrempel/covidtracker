@@ -13,6 +13,7 @@ object Versions {
     const val ktor = "1.3.2-1.4.0-rc"
     const val coroutines = "1.3.5-native-mt"
     const val serialization = "1.0-rc"
+    const val datetime = "0.1.0"
     const val lifecycle = "2.1.0"
     const val ktlint_gradle_plugin = "9.2.1"
     const val robolectric = "4.3.1"
@@ -22,9 +23,10 @@ object Deps {
     const val app_compat = "androidx.appcompat:appcompat:1.2.0"
     const val material = "com.google.android.material:material:1.2.0"
     const val core_ktx = "androidx.core:core-ktx:1.3.1"
-    val android_gradle_plugin = "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
+    const val android_gradle_plugin = "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
     const val junit = "junit:junit:${Versions.junit}"
-    val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
+    const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
+    const val kotlindate = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.datetime}"
 
     object AndroidXTest {
         val core = "androidx.test:core:${Versions.androidx_test}"

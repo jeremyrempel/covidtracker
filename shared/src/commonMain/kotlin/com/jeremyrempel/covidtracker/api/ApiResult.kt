@@ -1,5 +1,7 @@
 package com.jeremyrempel.covidtracker.api
 
+import kotlinx.datetime.Instant
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -15,7 +17,8 @@ data class ApiResult(
     val hospitalizedIncrease: Int,
     val inIcuCumulative: Int,
     val inIcuCurrently: Int,
-    val lastModified: String, // todo use kotlinx.date
+    @SerialName("lastModified")
+    private val lastModifiedRaw: String,
     val negative: Int,
     val negativeIncrease: Int,
     val onVentilatorCumulative: Int,
@@ -29,4 +32,7 @@ data class ApiResult(
     val total: Int,
     val totalTestResults: Int,
     val totalTestResultsIncrease: Int
-)
+) {
+    val lastModified: Instant
+        get() = Instant.parse(lastModifiedRaw)
+}
