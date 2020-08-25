@@ -38,7 +38,12 @@ import androidx.ui.tooling.preview.Preview
 import com.example.composetest.R
 import com.jeremyrempel.covidtracker.api.ApiResult
 import kotlinx.coroutines.flow.Flow
+import kotlinx.datetime.toJavaInstant
 import java.text.DecimalFormat
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.util.Locale
 
 val green = Color(50, 150, 50)
 val red = Color(200, 50, 50)
@@ -117,6 +122,10 @@ fun DataTable(
     uiModel: ApiResult
 ) {
     val numFormatter = DecimalFormat("#,###")
+    val dateFormatter = DateTimeFormatter
+        .ofLocalizedDate(FormatStyle.FULL)
+        .withLocale(Locale.US)
+        .withZone(ZoneId.of("UTC"));
 
     Column {
         Box(Modifier.padding(20.dp)) {
@@ -135,7 +144,10 @@ fun DataTable(
             TwoColumnRow("Total Ventilator", "9533", UpDown.DOWN)
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                Text("Last Updated ${uiModel.lastModified}", color = Color.Gray)
+                Text(
+                    "Last Updated: ${dateFormatter.format(uiModel.lastModified.toJavaInstant())}",
+                    color = Color.Gray
+                )
             }
         }
     }

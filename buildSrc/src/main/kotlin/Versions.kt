@@ -17,6 +17,7 @@ object Versions {
     const val lifecycle = "2.1.0"
     const val ktlint_gradle_plugin = "9.2.1"
     const val robolectric = "4.3.1"
+    const val jdkDesugar = "1.0.10"
 }
 
 object Deps {
@@ -27,6 +28,7 @@ object Deps {
     const val junit = "junit:junit:${Versions.junit}"
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
     const val kotlindate = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.datetime}"
+    const val jdkDesugar = "com.android.tools:desugar_jdk_libs:${Versions.jdkDesugar}"
 
     object AndroidXTest {
         val core = "androidx.test:core:${Versions.androidx_test}"

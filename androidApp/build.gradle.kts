@@ -29,6 +29,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -80,4 +81,6 @@ dependencies {
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.AndroidXTest.junit)
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+
+    coreLibraryDesugaring(Deps.jdkDesugar)
 }
