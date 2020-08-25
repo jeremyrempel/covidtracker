@@ -125,7 +125,7 @@ fun DataTable(
     val dateFormatter = DateTimeFormatter
         .ofLocalizedDate(FormatStyle.FULL)
         .withLocale(Locale.US)
-        .withZone(ZoneId.of("UTC"));
+        .withZone(ZoneId.of("UTC"))
 
     Column {
         Box(Modifier.padding(20.dp)) {
