@@ -135,7 +135,7 @@ fun DataTable(
             TwoColumnRow("Total Ventilator", "9533", UpDown.DOWN)
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                Text("Last Updated Aug 12, 2020", color = Color.Gray)
+                Text("Last Updated ${uiModel.lastModified}", color = Color.Gray)
             }
         }
     }

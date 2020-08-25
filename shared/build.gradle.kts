@@ -30,6 +30,7 @@ kotlin {
         implementation(Deps.Ktor.commonLogging)
         implementation(Deps.Coroutines.common)
         implementation(Deps.Ktor.commonSerialization)
+        implementation(Deps.kotlindate)
     }
 
     sourceSets["androidMain"].dependencies {
