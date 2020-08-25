@@ -38,7 +38,6 @@ import androidx.ui.tooling.preview.Preview
 import com.example.composetest.R
 import com.jeremyrempel.covidtracker.api.ApiResult
 import kotlinx.coroutines.flow.Flow
-import kotlinx.datetime.toJavaInstant
 import java.text.DecimalFormat
 
 val green = Color(50, 150, 50)
