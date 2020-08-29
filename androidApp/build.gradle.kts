@@ -80,7 +80,7 @@ dependencies {
 
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.AndroidXTest.junit)
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    androidTestImplementation(Deps.AndroidXTest.espresso)
 
     coreLibraryDesugaring(Deps.jdkDesugar)
 }
