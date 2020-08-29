@@ -8,6 +8,7 @@ object Versions {
     const val androidx_test = "1.2.0"
     const val androidx_test_ext = "1.1.1"
     const val android_gradle_plugin = "4.2.0-alpha08"
+    const val espresso = "3.2.0"
     const val junit = "4.13"
     const val sqlDelight = "1.4.0"
     const val ktor = "1.3.2-1.4.0-rc"
@@ -35,6 +36,7 @@ object Deps {
         val junit = "androidx.test.ext:junit:${Versions.androidx_test_ext}"
         val runner = "androidx.test:runner:${Versions.androidx_test}"
         val rules = "androidx.test:rules:${Versions.androidx_test}"
+        val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     }
 
     object KotlinTest {
@@ -67,16 +69,8 @@ object Deps {
         const val commonCore = "io.ktor:ktor-client-core:${Versions.ktor}"
         const val commonJson = "io.ktor:ktor-client-json:${Versions.ktor}"
         const val commonLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
-        const val jvmCore = "io.ktor:ktor-client-core-jvm:${Versions.ktor}"
         const val androidCore = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
-        const val jvmJson = "io.ktor:ktor-client-json-jvm:${Versions.ktor}"
-        const val jvmLogging = "io.ktor:ktor-client-logging-jvm:${Versions.ktor}"
-        const val ios = "io.ktor:ktor-client-ios:${Versions.ktor}"
         const val iosCore = "io.ktor:ktor-client-core-native:${Versions.ktor}"
-        const val iosJson = "io.ktor:ktor-client-json-native:${Versions.ktor}"
-        const val iosLogging = "io.ktor:ktor-client-logging-native:${Versions.ktor}"
         const val commonSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
-        const val androidSerialization = "io.ktor:ktor-client-serialization-jvm:${Versions.ktor}"
-        const val iosSerialization = "io.ktor:ktor-client-serialization-native:${Versions.ktor}"
     }
 }
