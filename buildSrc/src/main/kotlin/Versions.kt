@@ -7,7 +7,7 @@ object Versions {
     const val compose = "0.1.0-dev17"
     const val androidx_test = "1.2.0"
     const val androidx_test_ext = "1.1.1"
-    const val android_gradle_plugin = "4.2.0-alpha07"
+    const val android_gradle_plugin = "4.2.0-alpha08"
     const val junit = "4.13"
     const val sqlDelight = "1.4.0"
     const val ktor = "1.3.2-1.4.0-rc"
