@@ -30,7 +30,7 @@ subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
     ktlint {
-        version.set("0.37.2")
+        version.set(Versions.ktlint)
         verbose.set(true)
         filter {
             exclude { it.file.path.contains("build/") }
