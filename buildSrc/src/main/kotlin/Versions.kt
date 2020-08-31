@@ -16,7 +16,8 @@ object Versions {
     const val serialization = "1.0-rc"
     const val datetime = "0.1.0"
     const val lifecycle = "2.1.0"
-    const val ktlint_gradle_plugin = "9.2.1"
+    const val ktlint_gradle_plugin = "9.3.0"
+    const val ktlint = "0.38.1"
     const val robolectric = "4.3.1"
     const val jdkDesugar = "1.0.10"
 }
