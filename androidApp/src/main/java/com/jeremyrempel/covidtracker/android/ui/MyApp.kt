@@ -40,7 +40,6 @@ import com.example.composetest.R
 import com.jeremyrempel.covidtracker.api.ApiResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.toJavaInstant
-import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.time.ZoneId
