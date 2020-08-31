@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.CircularProgressIndicator
@@ -39,6 +40,8 @@ import com.example.composetest.R
 import com.jeremyrempel.covidtracker.api.ApiResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.toJavaInstant
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -121,6 +124,7 @@ fun LoadingView() {
 fun DataTable(
     uiModel: ApiResult
 ) {
+    val decimalFormatter = DecimalFormat("###.##%")
     val numFormatter = DecimalFormat("#,###")
     val dateFormatter = DateTimeFormatter
         .ofLocalizedDate(FormatStyle.FULL)
@@ -129,19 +133,35 @@ fun DataTable(
 
     Column {
         Box(Modifier.padding(20.dp)) {
-            TwoColumnRow("Total Cases", numFormatter.format(uiModel.total), UpDown.UP)
+            TwoColumnRow("Total Cases", numFormatter.format(uiModel.positive))
             TwoColumnRow(
                 "New Cases",
                 numFormatter.format(uiModel.totalTestResultsIncrease),
                 UpDown.UP
             )
+            TwoColumnRow("Total Deaths", numFormatter.format(uiModel.death))
+            TwoColumnRow("New Deaths", numFormatter.format(uiModel.deathIncrease), UpDown.UP)
+            TwoColumnRow("Total Recovered", numFormatter.format(uiModel.recovered), UpDown.UP)
+
             TwoColumnRow(
-                "Total Hospitalized",
-                numFormatter.format(uiModel.hospitalized),
+                "Death Rate",
+                decimalFormatter.format(
+                    uiModel.death.toBigDecimal()
+                        .divide(uiModel.positive.toBigDecimal(), 5, RoundingMode.HALF_UP)
+                )
+            )
+
+            TwoColumnRow(
+                "Positive Increase",
+                numFormatter.format(uiModel.positiveIncrease),
                 UpDown.DOWN
             )
-            TwoColumnRow("Total ICU", "9533", UpDown.UP)
-            TwoColumnRow("Total Ventilator", "9533", UpDown.DOWN)
+
+            TwoColumnRow(
+                "Currently Hospitalized",
+                numFormatter.format(uiModel.hospitalizedCurrently),
+                UpDown.DOWN
+            )
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 Text(
@@ -203,16 +223,22 @@ fun TwoColumnRow(left: String, right: String, upDown: UpDown = UpDown.NEUTRAL) {
         ) {
             Text(right, color = Color.Gray, modifier = Modifier.padding(end = 6.dp))
 
-            if (upDown == UpDown.UP) {
-                Image(
-                    asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_up_24),
-                    colorFilter = ColorFilter.tint(green)
-                )
-            } else if (upDown == UpDown.DOWN) {
-                Image(
-                    asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_down_24),
-                    colorFilter = ColorFilter.tint(red),
-                )
+            when (upDown) {
+                UpDown.UP -> {
+                    Image(
+                        asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_up_24),
+                        colorFilter = ColorFilter.tint(green)
+                    )
+                }
+                UpDown.DOWN -> {
+                    Image(
+                        asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_down_24),
+                        colorFilter = ColorFilter.tint(red),
+                    )
+                }
+                else -> {
+                    Box(modifier = Modifier.width(24.dp))
+                }
             }
         }
     }
