@@ -134,28 +134,22 @@ fun DataTable(
         Box(Modifier.padding(20.dp)) {
             TwoColumnRow("Total Cases", numFormatter.format(uiModel.positive))
             TwoColumnRow(
-                "New Cases",
-                numFormatter.format(uiModel.totalTestResultsIncrease),
+                "New Daily Cases",
+                numFormatter.format(uiModel.positiveIncrease),
                 UpDown.UP
             )
             TwoColumnRow("Total Deaths", numFormatter.format(uiModel.death))
-            TwoColumnRow("New Deaths", numFormatter.format(uiModel.deathIncrease), UpDown.UP)
-            TwoColumnRow("Total Recovered", numFormatter.format(uiModel.recovered), UpDown.UP)
+            TwoColumnRow("New Daily Deaths", numFormatter.format(uiModel.deathIncrease), UpDown.UP)
+            TwoColumnRow("Total Recovered", numFormatter.format(uiModel.recovered))
 
             TwoColumnRow(
                 "Death Rate",
                 decimalFormatter.format(
                     uiModel.death.toBigDecimal()
                         .divide(uiModel.positive.toBigDecimal(), 5, RoundingMode.HALF_UP)
-                )
-            )
-
-            TwoColumnRow(
-                "Positive Increase",
-                numFormatter.format(uiModel.positiveIncrease),
+                ),
                 UpDown.DOWN
             )
-
             TwoColumnRow(
                 "Currently Hospitalized",
                 numFormatter.format(uiModel.hospitalizedCurrently),
@@ -226,13 +220,13 @@ fun TwoColumnRow(left: String, right: String, upDown: UpDown = UpDown.NEUTRAL) {
                 UpDown.UP -> {
                     Image(
                         asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_up_24),
-                        colorFilter = ColorFilter.tint(green)
+                        colorFilter = ColorFilter.tint(red)
                     )
                 }
                 UpDown.DOWN -> {
                     Image(
                         asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_down_24),
-                        colorFilter = ColorFilter.tint(red),
+                        colorFilter = ColorFilter.tint(green),
                     )
                 }
                 else -> {
