@@ -39,6 +39,7 @@ import androidx.ui.tooling.preview.Preview
 import com.example.composetest.R
 import com.jeremyrempel.covidtracker.api.ApiResult
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.datetime.toJavaInstant
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -100,7 +101,6 @@ fun ErrorView(text: String) {
 
 @Composable
 fun LoadingView() {
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -241,5 +241,39 @@ fun TwoColumnRow(left: String, right: String, upDown: UpDown = UpDown.NEUTRAL) {
 @Preview
 @Composable
 fun DefaultPreview() {
-    Text("Hello World")
+    val data = flowOf(
+        Lce.Content(
+            ApiResult(
+                20201020,
+                "201212",
+                100000,
+                234,
+                "abc123",
+                200000,
+                100000,
+                100000,
+                200,
+                100,
+                10000,
+                "20201001",
+                1000,
+                100,
+                1000,
+                100,
+                5000,
+                1000,
+                5000,
+                1000,
+                6000,
+                50,
+                700000,
+                1000000,
+                10000,
+            )
+        )
+    )
+
+    MyAppTheme(false) {
+        MyApp(data)
+    }
 }
