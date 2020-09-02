@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.IconButton
@@ -33,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
@@ -68,10 +71,14 @@ fun MainScreen(uiModel: ApiResult) {
     var openDialog by remember { mutableStateOf(false) }
     var currentContent by remember { mutableStateOf(0) }
 
+    if (openDialog) {
+        SettingsDialog(onDismiss = { openDialog = false })
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Covid Tracker US") },
+                title = { Text(ContextAmbient.current.getString(R.string.app_name)) },
                 actions = {
                     IconButton(onClick = { openDialog = true }) {
                         Icon(Icons.Filled.Settings)
@@ -94,6 +101,32 @@ fun MainScreen(uiModel: ApiResult) {
     )
 }
 
+@Preview
+@Composable
+fun SettingsDialogPreview() {
+    SettingsDialog(onDismiss = {})
+}
+
+@Composable
+fun SettingsDialog(onDismiss: () -> Unit) {
+    val ctx = ContextAmbient.current
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(ctx.getString(R.string.about_app_name)) },
+        text = {
+            Text("Covid Tracker is a free OSS app")
+            Text("Data is provided by Covid Tracking Project")
+            Text("Source code available on Github")
+        },
+        confirmButton = {
+            Button(onClick = onDismiss) {
+                Text(ctx.getString(R.string.button_close))
+            }
+        }
+    )
+}
+
 @Composable
 fun ErrorView(text: String) {
     Text(text)
@@ -104,7 +137,7 @@ fun LoadingView() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Covid Tracker US") }
+                title = { Text("Covid Tracker") }
             )
         },
         bodyContent = {

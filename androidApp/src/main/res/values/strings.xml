@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Covid Tracker</string>
+    <string name="about_app_name">About Covid Tracker</string>
+    <string name="button_close">Close</string>
 </resources>
