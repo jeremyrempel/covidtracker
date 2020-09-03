@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.platform.setContent
-import com.jeremyrempel.covidtracker.android.ui.Lce
 import com.jeremyrempel.covidtracker.android.ui.MyApp
 import com.jeremyrempel.covidtracker.android.ui.MyAppTheme
 import com.jeremyrempel.covidtracker.api.MyApi
+import com.jeremyrempel.covidtracker.ui.Lce
 import kotlinx.coroutines.flow.flow
 
 class MainActivity : AppCompatActivity() {
