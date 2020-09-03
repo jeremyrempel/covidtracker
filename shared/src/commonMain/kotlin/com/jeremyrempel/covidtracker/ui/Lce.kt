@@ -1,4 +1,4 @@
-package com.jeremyrempel.covidtracker.android.ui
+package com.jeremyrempel.covidtracker.ui
 
 sealed class Lce<T> {
     class Loading<T> : Lce<T>()
