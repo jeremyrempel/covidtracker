@@ -4,7 +4,7 @@ object Versions {
     const val compile_sdk = 30
 
     const val kotlin = "1.4.0"
-    const val compose = "0.1.0-dev17"
+    const val compose = "1.0.0-alpha02"
     const val androidx_test = "1.2.0"
     const val androidx_test_ext = "1.1.1"
     const val android_gradle_plugin = "4.2.0-alpha08"
