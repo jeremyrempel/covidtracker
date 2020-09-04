@@ -179,7 +179,7 @@ fun DataTable(
             TwoColumnRow(
                 "Death Rate",
                 decimalFormatter.format(
-                    uiModel.death.toBigDecimal()
+                    (uiModel.death ?: 0).toBigDecimal()
                         .divide(uiModel.positive.toBigDecimal(), 5, RoundingMode.HALF_UP)
                 ),
                 UpDown.DOWN
