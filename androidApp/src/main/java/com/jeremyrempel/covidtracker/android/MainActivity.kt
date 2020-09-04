@@ -15,9 +15,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val uiStateFlow = flow {
-            val api = MyApi()
-            val uiModel = api.getCurrentData()[0]
-            emit(Lce.Content(uiModel))
+            try {
+                val api = MyApi()
+                val uiModel = api.getCurrentData()[0]
+                emit(Lce.Content(uiModel))
+            } catch (e: Throwable) {
+                // todo log
+                emit(Lce.Error(e.message ?: "Unknown Error"))
+            }
         }
 
         setContent {
