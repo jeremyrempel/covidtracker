@@ -11,6 +11,7 @@ import kotlinx.serialization.json.Json
 
 /**
  * https://api.covidtracking.com/v1/us/current.json
+ * https://api.covidtracking.com/v1/us/daily.json
  */
 class MyApi(
     private val scheme: String = "https",
@@ -40,7 +41,7 @@ class MyApi(
         return client.get(
             scheme = scheme,
             host = host,
-            path = "/v1/us/current.json"
+            path = "/v1/us/daily.json"
         )
     }
 }
