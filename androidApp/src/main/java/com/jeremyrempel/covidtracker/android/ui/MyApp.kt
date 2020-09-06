@@ -166,31 +166,49 @@ fun DataTable(
 
     Column {
         Box(Modifier.padding(20.dp)) {
-            TwoColumnRow("Total Cases", numFormatter.format(uiModel.totalCase))
+            TwoColumnRow(
+                "Total Cases",
+                numFormatter.format(uiModel.totalCase)
+            )
             TwoColumnRow(
                 "New Daily Cases",
                 numFormatter.format(uiModel.newDailyCases),
-                SummaryModel.Change.UP
+                uiModel.newDailyCasesChange
             )
-            TwoColumnRow("Total Deaths", numFormatter.format(uiModel.totalDeaths))
+            TwoColumnRow(
+                "Total Deaths",
+                numFormatter.format(uiModel.totalDeaths)
+            )
             TwoColumnRow(
                 "New Daily Deaths",
                 numFormatter.format(uiModel.newDailyDeaths),
-                SummaryModel.Change.UP
+                uiModel.newDailyDeathsChange
             )
-            TwoColumnRow("Total Recovered", numFormatter.format(uiModel.totalRecovered))
-
+            TwoColumnRow(
+                "Total Recovered",
+                numFormatter.format(uiModel.totalRecovered)
+            )
             TwoColumnRow(
                 "Death Rate",
                 decimalFormatter.format(uiModel.deathRate),
-                SummaryModel.Change.DOWN
+                uiModel.deathRateChange
             )
             TwoColumnRow(
                 "Currently Hospitalized",
                 numFormatter.format(uiModel.currentlyHospitalized),
-                SummaryModel.Change.DOWN
+                uiModel.currentlyHospitalizedChange
             )
-
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                Text("Change on 30 moving average: ", color = Color.Gray)
+                Image(
+                    asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_up_24),
+                    colorFilter = ColorFilter.tint(red)
+                )
+                Image(
+                    asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_down_24),
+                    colorFilter = ColorFilter.tint(green),
+                )
+            }
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 Text(
                     "Last Updated: ${dateFormatter.format(uiModel.lastModified.toJavaInstant())}",

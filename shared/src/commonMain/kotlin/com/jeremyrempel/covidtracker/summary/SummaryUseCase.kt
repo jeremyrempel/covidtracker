@@ -29,18 +29,59 @@ class SummaryUseCase(
 
         val summary = apiModel[0]
 
+        val positiveMovingAvg = apiModel
+            .take(30)
+            .map { it.positiveIncrease }
+            .average()
+        val positiveChange = when {
+            summary.positiveIncrease > positiveMovingAvg -> SummaryModel.Change.UP
+            summary.positiveIncrease < positiveMovingAvg -> SummaryModel.Change.DOWN
+            else -> SummaryModel.Change.NOCHANGE
+        }
+
+        val deathMovingAvg = apiModel
+            .take(30)
+            .map { it.deathIncrease }
+            .average()
+        val deathChange = when {
+            summary.deathIncrease > deathMovingAvg -> SummaryModel.Change.UP
+            summary.deathIncrease < deathMovingAvg -> SummaryModel.Change.DOWN
+            else -> SummaryModel.Change.NOCHANGE
+        }
+
+        val currentlyHospitalizedAvg = apiModel
+            .take(30)
+            .map { it.hospitalizedIncrease ?: 0 }
+            .average()
+        val hospitializedChange = when {
+            summary.hospitalizedCurrently ?: 0 > currentlyHospitalizedAvg -> SummaryModel.Change.UP
+            summary.hospitalizedCurrently ?: 0 < currentlyHospitalizedAvg -> SummaryModel.Change.DOWN
+            else -> SummaryModel.Change.NOCHANGE
+        }
+
+        val deathRateMovingAvg = apiModel
+            .take(30)
+            .map { (summary.death ?: 0).toDouble() / summary.positive.toDouble() }
+            .average()
+        val currentDeathRate = (summary.death ?: 0).toDouble() / summary.positive.toDouble()
+        val deathRateChange = when {
+            currentDeathRate > deathRateMovingAvg -> SummaryModel.Change.UP
+            currentDeathRate < deathRateMovingAvg -> SummaryModel.Change.DOWN
+            else -> SummaryModel.Change.NOCHANGE
+        }
+
         return SummaryModel(
             summary.positive,
             summary.positiveIncrease,
-            SummaryModel.Change.UP,
+            positiveChange,
             summary.death ?: 0,
             summary.deathIncrease,
-            SummaryModel.Change.DOWN,
+            deathChange,
             summary.recovered ?: 0,
-            (summary.death ?: 0).toDouble() / summary.positive.toDouble(),
-            SummaryModel.Change.UP,
+            currentDeathRate,
+            deathRateChange,
             summary.hospitalizedCurrently ?: 0,
-            SummaryModel.Change.UP,
+            hospitializedChange,
             summary.lastModified
         )
     }
