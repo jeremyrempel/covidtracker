@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.3.72")
 }
 
 repositories {
