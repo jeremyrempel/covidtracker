@@ -1,4 +1,4 @@
-package com.jeremyrempel.covidtracker.api
+package com.jeremyrempel.covidtracker.summary.api
 
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
@@ -37,7 +37,7 @@ class MyApi(
         }
     }
 
-    suspend fun getCurrentData(): List<ApiResult> {
+    internal suspend fun getCurrentData(): List<ApiResult> {
         return client.get(
             scheme = scheme,
             host = host,
