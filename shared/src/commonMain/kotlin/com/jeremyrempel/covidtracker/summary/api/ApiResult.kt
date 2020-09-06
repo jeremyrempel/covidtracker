@@ -1,11 +1,11 @@
-package com.jeremyrempel.covidtracker.api
+package com.jeremyrempel.covidtracker.summary.api
 
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ApiResult(
+internal data class ApiResult(
     val date: Int,
     val dateChecked: String,
     val death: Int?,

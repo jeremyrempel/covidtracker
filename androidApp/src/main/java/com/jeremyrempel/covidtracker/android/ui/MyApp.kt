@@ -40,12 +40,12 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.example.composetest.R
-import com.jeremyrempel.covidtracker.api.ApiResult
-import com.jeremyrempel.covidtracker.ui.Lce
+import com.jeremyrempel.covidtracker.summary.ui.Lce
+import com.jeremyrempel.covidtracker.summary.ui.SummaryModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.datetime.Clock
 import kotlinx.datetime.toJavaInstant
-import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -56,19 +56,19 @@ val green = Color(50, 150, 50)
 val red = Color(200, 50, 50)
 
 @Composable
-fun MyApp(flow: Flow<Lce<ApiResult>>) {
+fun MyApp(flow: Flow<Lce<SummaryModel>>) {
 
-    val uiModel: Lce<ApiResult> by flow.collectAsState(initial = Lce.Loading())
+    val uiModel: Lce<SummaryModel> by flow.collectAsState(initial = Lce.Loading())
 
     when (uiModel) {
         is Lce.Loading -> LoadingView()
-        is Lce.Error -> ErrorView((uiModel as Lce.Error<ApiResult>).msg) // todo why doesn't smart cast work?
-        is Lce.Content<ApiResult> -> MainScreen((uiModel as Lce.Content<ApiResult>).data)
+        is Lce.Error -> ErrorView((uiModel as Lce.Error<SummaryModel>).msg) // todo why doesn't smart cast work?
+        is Lce.Content<SummaryModel> -> MainScreen((uiModel as Lce.Content<SummaryModel>).data)
     }
 }
 
 @Composable
-fun MainScreen(uiModel: ApiResult) {
+fun MainScreen(uiModel: SummaryModel) {
     var openDialog by remember { mutableStateOf(false) }
     var currentContent by remember { mutableStateOf(0) }
 
@@ -155,7 +155,7 @@ fun LoadingView() {
 
 @Composable
 fun DataTable(
-    uiModel: ApiResult
+    uiModel: SummaryModel
 ) {
     val decimalFormatter = DecimalFormat("###.##%")
     val numFormatter = DecimalFormat("#,###")
@@ -166,28 +166,29 @@ fun DataTable(
 
     Column {
         Box(Modifier.padding(20.dp)) {
-            TwoColumnRow("Total Cases", numFormatter.format(uiModel.positive))
+            TwoColumnRow("Total Cases", numFormatter.format(uiModel.totalCase))
             TwoColumnRow(
                 "New Daily Cases",
-                numFormatter.format(uiModel.positiveIncrease),
-                UpDown.UP
+                numFormatter.format(uiModel.newDailyCases),
+                SummaryModel.Change.UP
             )
-            TwoColumnRow("Total Deaths", numFormatter.format(uiModel.death))
-            TwoColumnRow("New Daily Deaths", numFormatter.format(uiModel.deathIncrease), UpDown.UP)
-            TwoColumnRow("Total Recovered", numFormatter.format(uiModel.recovered))
+            TwoColumnRow("Total Deaths", numFormatter.format(uiModel.totalDeaths))
+            TwoColumnRow(
+                "New Daily Deaths",
+                numFormatter.format(uiModel.newDailyDeaths),
+                SummaryModel.Change.UP
+            )
+            TwoColumnRow("Total Recovered", numFormatter.format(uiModel.totalRecovered))
 
             TwoColumnRow(
                 "Death Rate",
-                decimalFormatter.format(
-                    (uiModel.death ?: 0).toBigDecimal()
-                        .divide(uiModel.positive.toBigDecimal(), 5, RoundingMode.HALF_UP)
-                ),
-                UpDown.DOWN
+                decimalFormatter.format(uiModel.deathRate),
+                SummaryModel.Change.DOWN
             )
             TwoColumnRow(
                 "Currently Hospitalized",
-                numFormatter.format(uiModel.hospitalizedCurrently),
-                UpDown.DOWN
+                numFormatter.format(uiModel.currentlyHospitalized),
+                SummaryModel.Change.DOWN
             )
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
@@ -235,10 +236,12 @@ fun BottomNavigationAlwaysShowLabelComponent(selectedIndex: Int, onSelect: (Int)
     }
 }
 
-enum class UpDown { UP, DOWN, NEUTRAL }
-
 @Composable
-fun TwoColumnRow(left: String, right: String, upDown: UpDown = UpDown.NEUTRAL) {
+fun TwoColumnRow(
+    left: String,
+    right: String,
+    upDown: SummaryModel.Change = SummaryModel.Change.NOCHANGE
+) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(4.dp),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -251,13 +254,13 @@ fun TwoColumnRow(left: String, right: String, upDown: UpDown = UpDown.NEUTRAL) {
             Text(right, color = Color.Gray, modifier = Modifier.padding(end = 6.dp))
 
             when (upDown) {
-                UpDown.UP -> {
+                SummaryModel.Change.UP -> {
                     Image(
                         asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_up_24),
                         colorFilter = ColorFilter.tint(red)
                     )
                 }
-                UpDown.DOWN -> {
+                SummaryModel.Change.DOWN -> {
                     Image(
                         asset = vectorResource(id = R.drawable.ic_baseline_arrow_drop_down_24),
                         colorFilter = ColorFilter.tint(green),
@@ -277,32 +280,19 @@ fun TwoColumnRow(left: String, right: String, upDown: UpDown = UpDown.NEUTRAL) {
 fun DefaultPreview() {
     val data = flowOf(
         Lce.Content(
-            ApiResult(
+            SummaryModel(
                 20201020,
-                "201212",
-                100000,
-                234,
-                "abc123",
-                200000,
-                100000,
-                100000,
-                200,
-                100,
-                10000,
-                "20201001",
-                1000,
-                100,
-                1000,
-                100,
-                5000,
-                1000,
-                5000,
-                1000,
-                6000,
-                50,
-                700000,
-                1000000,
-                10000,
+                44636,
+                SummaryModel.Change.UP,
+                180655,
+                915,
+                SummaryModel.Change.DOWN,
+                2302187,
+                0.0,
+                SummaryModel.Change.DOWN,
+                33496,
+                SummaryModel.Change.DOWN,
+                Clock.System.now(),
             )
         )
     )
