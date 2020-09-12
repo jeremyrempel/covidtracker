@@ -20,7 +20,7 @@ class SummaryUseCase(
                 emit(Lce.Content(uiModel))
             } catch (e: Throwable) {
                 log("Error fetching data", e)
-                emit(Lce.Error(e.message ?: "Error"))
+                emit(Lce.Error<SummaryModel>(e.message ?: "Error"))
             }
         }
     }
