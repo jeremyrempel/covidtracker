@@ -4,4 +4,4 @@ Display daily US Covid stats. Built using Jetpack Compose. Data provided by [Cov
 
 Dark             |  Light
 :-------------------------:|:-------------------------:
-![dark](/home/jeremy/projects/covidtracker/screens/dark.png)  | ![light](/home/jeremy/projects/covidtracker/screens/light.png)
+![dark](https://raw.githubusercontent.com/jeremyrempel/covidtracker/main/screens/dark.png)  | ![light](https://raw.githubusercontent.com/jeremyrempel/covidtracker/main/screens/light.png)
