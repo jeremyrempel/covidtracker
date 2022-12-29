@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization") version Versions.kotlin
+    kotlin("plugin.serialization") version 1.8.0
     id("com.android.library")
     id("com.squareup.sqldelight")
 }
